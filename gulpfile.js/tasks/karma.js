@@ -1,8 +1,9 @@
 var gulp = require('gulp');
 var karma = require('karma');
+var Server =  require('karma').Server;
 
 var karmaTask = function(done) {
-  karma.server.start({
+  var server = new Server({
     configFile: process.cwd() + '/karma.conf.js',
     singleRun: true
   }, function(exitStatus) {
@@ -11,6 +12,7 @@ var karmaTask = function(done) {
     // or: https://github.com/gulpjs/gulp/issues/587 for more information
     done(exitStatus ? "There are failing unit tests" : undefined);
   });
+  server.start()
 };
 
 gulp.task('karma', karmaTask);
